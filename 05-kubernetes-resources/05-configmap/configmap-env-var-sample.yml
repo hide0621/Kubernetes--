@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: test-config
+data:
+  TEST_ENV: test # 環境変数の設定
+
+--- # このバーを三つ付けることで一つのyamlファイルで複数のk8sオブジェクトを作ることが出来る
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: test-pod
+spec:
+  restartPolicy: Never
+  containers: 
+    - name: busybox
+      image: k8s.grc.io/busybox
+      command: [ "env" ] # 環境変数の出力,[]の中のコードには前後に半角スペースを入れること
+      envFrom: 
+        - configMapRef: 
+            name: test-config

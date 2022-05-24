@@ -1,0 +1,22 @@
+# 環境変数を事前に定義して、Pod内のコンテナがそれを読み込むことでConfigMapを使う例
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-config
+data:
+  TEST_ENV: test
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  restartPolicy: Never
+  containers:
+    - name: busybox
+      image: k8s.gcr.io/busybox
+      command: [ "env" ] # print env var
+      envFrom:
+        - configMapRef:
+            name: test-config #ConfigMapの名前

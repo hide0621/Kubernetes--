@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: #Replicasetに対するmetadata
+  name: nginx
+  labels: 
+    app: nginx #ラベル名
+spec:
+  replicas: 2
+  selector:
+    matchLabels: # 上のmetadataで定義したラベル(appの部分にあるnginx)と、下のmetadataで定義したラベルを合致させる役割。自分が作成したPodをselectorで見つける為にも必要。
+      app: nginx
+  template: 
+    metadata: #Podテンプレートの中に記述されているので、Podに対するmetadata
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx

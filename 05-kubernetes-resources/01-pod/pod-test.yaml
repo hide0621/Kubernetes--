@@ -1,0 +1,9 @@
+#このファイルからpodが作成される
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod-test #pod名、「kubectl get」で「name」に表示されるもの
+spec: #これから作成したいpodの中身について記載していく
+  containers:
+      - name: nginx #コンテナ名
+        image: nginx #コンテナイメージ名
