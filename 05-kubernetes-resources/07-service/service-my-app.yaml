@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: my-app
+spec: 
+  selector: 
+    app: MyApp # ここで対象のPodを持っている、Service経由でこのPodにアクセスすることが出来る
+  ports: 
+    - protocol: TCP
+      port: 80
+      targetPort: 80

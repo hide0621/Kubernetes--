@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: mysql
+spec:
+  template: 
+    metadata: 
+      labels:
+        - app: mysql # 後でServiceを作るのでラベルを貼っておく
+    spec:
+      containers: # コンテナを作成
+        - name: mysql
+          image: mysql:5.7
+          env: # MySQLのコンテナ起動時に設定しないといけない環境変数の設定をしている https://hub.docker.com/_/mysql
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: MYSQL_DATABASE
+              value: test_db
+            - name: MYSQL_USER
+              value: sample_app
+            - name: MYSQL_PASSWORD
+              value: password
